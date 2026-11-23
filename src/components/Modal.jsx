@@ -11,7 +11,6 @@ export default function Modal({ isOpen, onClose, children, maxWidth = "460px" })
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    // Prevent scrolling behind modal
     document.body.style.overflow = "hidden";
 
     return () => {
@@ -24,17 +23,20 @@ export default function Modal({ isOpen, onClose, children, maxWidth = "460px" })
 
   return (
     <div
-      className="modal-overlay"
+      className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 transition-opacity"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
       role="dialog"
       aria-modal="true"
     >
-      <div className="modal-container" style={{ maxWidth }}>
+      <div
+        className="relative w-full bg-white rounded-2xl shadow-xl p-6 sm:p-7 overflow-hidden animate-in zoom-in-95 duration-150"
+        style={{ maxWidth }}
+      >
         <button
           type="button"
-          className="modal-close-btn"
+          className="absolute top-4 right-4 p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
           onClick={onClose}
           aria-label="Tutup dialog"
         >
